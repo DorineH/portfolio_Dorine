@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 
 const experiences = [
   {

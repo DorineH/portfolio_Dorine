@@ -74,7 +74,7 @@ export default function Contact() {
                   </Typography>
                 </li>
                 <li>
-                  <Typography>Culture produit & sens de l'UX</Typography>
+                  <Typography>Culture produit & sens de l&apos;UX</Typography>
                 </li>
                 <li>
                   <Typography>
