@@ -1,42 +1,39 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root { scroll-behavior: smooth; }
+
+/* Accent underline helper */
+.u-underline {
+background: linear-gradient(transparent 65%, rgba(225,29,72,.25) 0);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+	font-family: 'Domino Brick';
+	src: url('/fonts/DominoBrick-aYy39.ttf') format('woff2'),
+			 url('/fonts/DominoBrick-aYy39.ttf') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+.domino-title {
+	font-family: 'Domino Brick', "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	/* optional visual tweaks */
+	letter-spacing: 0.5px;
+	line-height: 1.05;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+	font-family: 'The Lego Movie';
+	src: url('/fonts/TheLegoMovie-lr7X.ttf') format('woff2'),
+			 url('/fonts/TheLegoMovie-lr7X.ttf') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.the-lego-movie-title {
+	font-family: 'The Lego Movie', "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	/* optional visual tweaks */
+	letter-spacing: 0.5px;
+	line-height: 1.05;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
