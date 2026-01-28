@@ -12,6 +12,7 @@ import {
   Drawer,
   List,
   ListItemButton,
+  Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -21,7 +22,7 @@ const links = [
   { label: "Projets", href: "#projects" },
   { label: "Éducation", href: "#education" },
   { label: "Certifs", href: "#certifications" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "#contact" }
 ];
 
 export default function NavBar() {
@@ -38,6 +39,7 @@ export default function NavBar() {
     >
       <Container>
         <Toolbar disableGutters sx={{ gap: 2 }}>
+          <Avatar src="avatar_portfolio.png" />
           <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 800 }}>
             Dorine <span className="u-underline">Henry</span>
           </Typography>

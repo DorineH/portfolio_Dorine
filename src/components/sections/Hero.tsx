@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 import DownloadIcon from "@mui/icons-material/Download";
 
@@ -52,20 +52,25 @@ export default function Hero() {
     <Box
       sx={{
         display: "flex",
-        alignItems: "center",
+        alignItems: { xs: "center", sm: "flex-start" },
         gap: 6,
-        flexDirection: { xs: "column", md: "row" },
+        flexDirection: { xs: "column", sm: "row" },
+        textAlign: { xs: "center", sm: "left" },
       }}
     >
       {/* Photo */}
-      <Box sx={{ flex: "0 0 auto" }}>
+      <Box
+        sx={{
+          flex: "0 0 auto",
+          display: { xs: "none", sm: "block" },
+        }}
+      >
         <Avatar
           src="/photo_cv.jpg"
           alt="Portrait de Dorine Henry"
           sx={{
-            width: 240,
-            height: 240,
-            mx: { xs: "auto", md: 0 },
+            width: { sm: 140, md: 200, lg: 240 },
+            height: { sm: 140, md: 200, lg: 240 },
             border: (t) => `6px solid ${t.palette.primary.main}`,
           }}
         />
@@ -73,18 +78,31 @@ export default function Hero() {
 
       {/* Texte */}
       <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Typography variant="h1" gutterBottom className="domino-title">
-          Développeuse Full-Stack JS/TS
+        <Typography
+          variant="h1"
+          gutterBottom
+          className="domino-title"
+          textAlign={"justify"}
+        >
+          Développeuse web freelance — <br className="desktop-break" /> je crée
+          des sites modernes et performants
         </Typography>
 
-        <Typography sx={{ opacity: 0.9, mb: 2 }}>
-          Développeuse web full-stack JavaScript/TypeScript (React, Next.js,
-          NestJS, Node.js) avec plus de 2 ans d&apos;expérience, je conçois des
-          applications performantes et évolutives en alliant rigueur technique et sens produit.
-          Passionnée par les technologies modernes et l’innovation, j’aime transformer des idées en solutions concrètes, de la preuve de concept jusqu’à la mise en production.
+        <Typography sx={{ opacity: 0.9, mb: 2, textAlign: "justify" }}>
+          Développeuse web freelance spécialisée dans la création de sites
+          internet modernes et performants pour indépendants et petites
+          entreprises. J&apos;accompagne mes clients de l&apos;idée à la mise en
+          ligne en concevant des sites clairs, rapides et adaptés à leurs
+          besoins. Mon objectif : vous aider à développer votre visibilité en
+          ligne avec un site professionnel et efficace.
         </Typography>
 
-        <Stack direction="row" flexWrap="wrap" mb={3}>
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          mb={3}
+          justifyContent={{ xs: "center", sm: "flex-start" }}
+        >
           {[
             "Next.js",
             "React",
@@ -99,14 +117,30 @@ export default function Hero() {
           ))}
         </Stack>
 
-        <Stack direction="row" spacing={2} flexWrap="wrap">
-          <Button href="#contact">Me contacter</Button>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: 1.5, sm: 2 }}
+          sx={{
+            width: "100%",
+            alignItems: { xs: "stretch", sm: "center" },
+            justifyContent: { xs: "center", sm: "flex-start" },
+          }}
+        >
+          <Button
+            href="#contact"
+            fullWidth
+            sx={{ width: { xs: "100%", sm: "auto" } }}
+          >
+            Me contacter
+          </Button>
           <Button
             href="https://github.com/DorineH"
             target="_blank"
             rel="noreferrer"
             variant="outlined"
             endIcon={<LaunchIcon />}
+            fullWidth
+            sx={{ width: { xs: "100%", sm: "auto" } }}
           >
             GitHub
           </Button>
@@ -114,6 +148,8 @@ export default function Hero() {
             href="/Cv_Dorine_Henry.pdf"
             variant="outlined"
             endIcon={<DownloadIcon />}
+            fullWidth
+            sx={{ width: { xs: "100%", sm: "auto" } }}
           >
             Télécharger mon CV
           </Button>

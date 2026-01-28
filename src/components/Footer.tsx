@@ -17,7 +17,7 @@ export default function Footer() {
         >
           <Typography>© {new Date().getFullYear()} Dorine Henry</Typography>
           <Stack direction="row" spacing={2}>
-            <Link href="mailto:dorinehenry3@gmail.com">Email</Link>
+            <Link href="mailto:dorine.h13@gmail.com">Email</Link>
             <Link href="https://github.com/DorineH" target="_blank">
               GitHub
             </Link>

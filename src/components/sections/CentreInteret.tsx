@@ -1,4 +1,3 @@
-// components/CentreInteret.tsx
 "use client";
 
 import * as React from "react";
@@ -29,37 +28,62 @@ const items = [
 
 export default function CentreInteret() {
   return (
-    <Box component="section" sx={{ py: { xs: 5, md: 7 } }}>
+    <Box
+      component="section"
+      id="centreInteret"
+      sx={{
+        position: "relative",
+        py: { xs: 4, md: 6 },
+        px: { xs: 2, md: 4 },
+        borderRadius: 2,
+        overflow: "hidden",
+      }}
+    >
       <Typography variant="h2" gutterBottom className="the-lego-movie-title">
-        Centre Interet
+        Centre interet
       </Typography>
-      <Container maxWidth="lg">
-        <Grid container spacing={3} alignItems="stretch">
+
+      <Container maxWidth="lg" disableGutters sx={{ px: { xs: 0, md: 0 } }}>
+        <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} alignItems="stretch">
           {items.map((it) => (
-            <Grid key={it.title} size={{ xs: 12, md: 4 }} sx={{ display: "flex" }}>
+            <Grid
+              key={it.title}
+              size={{ xs: 12, sm: 6, md: 4 }} // ✅ mobile=1 col, tablette=2 col, desktop=3 col
+              sx={{ display: "flex" }}
+            >
               <Paper
                 elevation={0}
                 sx={{
                   flex: 1,
                   display: "flex",
                   flexDirection: "column",
-                  p: { xs: 3, md: 3.5 },
+
+                  // ✅ plus compact sur mobile
+                  p: { xs: 2, sm: 3, md: 3.5 },
                   textAlign: "center",
-                  borderRadius: 3,
+                  borderRadius: { xs: 2.5, md: 3 },
                   border: "1px solid",
                   borderColor: "rgba(95, 65, 46, 0.12)",
                   boxShadow: "0 10px 28px rgba(0,0,0,0.06)",
                   transition:
                     "transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease",
+
+                  // ✅ hover seulement desktop (meilleur UX sur tactile)
                   "&:hover": {
-                    transform: "translateY(-3px)",
-                    boxShadow: "0 14px 34px rgba(0,0,0,0.09)",
-                    borderColor: "rgba(95, 65, 46, 0.22)",
+                    transform: { xs: "none", md: "translateY(-3px)" },
+                    boxShadow: {
+                      xs: "0 10px 28px rgba(0,0,0,0.06)",
+                      md: "0 14px 34px rgba(0,0,0,0.09)",
+                    },
+                    borderColor: {
+                      xs: "rgba(95, 65, 46, 0.12)",
+                      md: "rgba(95, 65, 46, 0.22)",
+                    },
                   },
                 }}
               >
                 <Stack
-                  spacing={1.5}
+                  spacing={{ xs: 1.2, md: 1.5 }}
                   alignItems="center"
                   justifyContent="center"
                   sx={{ flexGrow: 1 }}
@@ -67,14 +91,15 @@ export default function CentreInteret() {
                   <Box
                     aria-hidden
                     sx={{
-                      width: 78,
-                      height: 78,
+                      // ✅ icône plus petite sur mobile
+                      width: { xs: 60, sm: 72, md: 78 },
+                      height: { xs: 60, sm: 72, md: 78 },
                       borderRadius: 3,
                       display: "grid",
                       placeItems: "center",
                       bgcolor: "rgba(95, 65, 46, 0.08)",
                       color: BROWN,
-                      "& svg": { fontSize: 42 },
+                      "& svg": { fontSize: { xs: 34, sm: 40, md: 42 } },
                     }}
                   >
                     {it.icon}
@@ -87,6 +112,7 @@ export default function CentreInteret() {
                       letterSpacing: "0.08em",
                       textTransform: "uppercase",
                       color: BROWN,
+                      fontSize: { xs: 14, sm: 15, md: 16 }, // ✅ plus petit sur mobile
                     }}
                   >
                     {it.title}
@@ -96,9 +122,9 @@ export default function CentreInteret() {
                     sx={{
                       maxWidth: 360,
                       mx: "auto",
-                      lineHeight: 1.7,
+                      lineHeight: { xs: 1.55, md: 1.7 },
                       color: "rgba(95, 65, 46, 0.65)",
-                      fontSize: "1.05rem",
+                      fontSize: { xs: "0.95rem", sm: "1rem", md: "1.05rem" }, // ✅ responsive
                     }}
                   >
                     {it.description}

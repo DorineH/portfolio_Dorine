@@ -257,7 +257,17 @@ export default function Projects() {
   };
 
   return (
-    <Box component="section" id="projects">
+    <Box
+      component="section"
+      id="projects"
+      sx={{
+        position: "relative",
+        py: { xs: 4, md: 6 },
+        px: { xs: 2, md: 4 },
+        borderRadius: 2,
+        overflow: "hidden",
+      }}
+    >
       <Typography variant="h2" gutterBottom className="the-lego-movie-title">
         Projets realises
       </Typography>

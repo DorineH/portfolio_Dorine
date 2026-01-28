@@ -1,39 +1,63 @@
-:root { scroll-behavior: smooth; }
+:root {
+  scroll-behavior: smooth;
+}
 
 /* Accent underline helper */
 .u-underline {
-background: linear-gradient(transparent 65%, rgba(225,29,72,.25) 0);
+  background: linear-gradient(transparent 65%, rgba(225, 29, 72, 0.25) 0);
 }
 
 @font-face {
-	font-family: 'Domino Brick';
-	src: url('/fonts/DominoBrick-aYy39.ttf') format('woff2'),
-			 url('/fonts/DominoBrick-aYy39.ttf') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+  font-family: "Domino Brick";
+  src:
+    url("/fonts/DominoBrick-aYy39.ttf") format("woff2"),
+    url("/fonts/DominoBrick-aYy39.ttf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 .domino-title {
-	font-family: 'Domino Brick', "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	/* optional visual tweaks */
-	letter-spacing: 0.5px;
-	line-height: 1.05;
+  font-family:
+    "Domino Brick", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* optional visual tweaks */
+  letter-spacing: 0.5px;
+  line-height: 1.05;
 }
 
 @font-face {
-	font-family: 'The Lego Movie';
-	src: url('/fonts/TheLegoMovie-lr7X.ttf') format('woff2'),
-			 url('/fonts/TheLegoMovie-lr7X.ttf') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+  font-family: "The Lego Movie";
+  src:
+    url("/fonts/TheLegoMovie-lr7X.ttf") format("woff2"),
+    url("/fonts/TheLegoMovie-lr7X.ttf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 .the-lego-movie-title {
-	font-family: 'The Lego Movie', "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	/* optional visual tweaks */
-	letter-spacing: 0.5px;
-	line-height: 1.05;
+  font-family:
+    "The Lego Movie", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* optional visual tweaks */
+  letter-spacing: 0.5px;
+  line-height: 1.05;
 }
 
+body {
+  background-image: url("../../public/background.jpg");
+  background-size: cover; /* Remplit tout l'écran */
+  background-position: center; /* Centre l'image */
+  background-repeat: no-repeat; /* Pas de répétition */
+  background-attachment: fixed; /* Effet fixe au scroll */
+}
+
+
+.desktop-break {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .desktop-break {
+    display: block;
+  }
+}

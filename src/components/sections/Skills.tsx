@@ -1,218 +1,157 @@
 "use client";
 
-import {
-  Box,
-  Card,
-  CardContent,
-  IconButton,
-  Chip,
-  Stack,
-  Typography,
-} from "@mui/material";
-import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import React from "react";
+import { Box, Card, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 const groups = [
   {
-    title: "Front‑end",
-    items: ["JavaScript", "TypeScript", "Next.js", "React", "Redux", "MUI"],
+    title: "Front-end",
+    items: ["JavaScript", "TypeScript", "Next.js", "React"], // , "Redux", "MUI"
   },
   {
-    title: "Back‑end",
-    items: ["Node.js", "NestJS", "Python", "TypeORM", "Sequelize"],
+    title: "Back-end",
+    items: ["Node.js", "NestJS", "Python"],
+  },
+  {
+    title: "ORM",
+    items: ["TypeORM", "Sequelize"],
   },
   {
     title: "Base de données",
     items: ["PostgreSQL", "MySQL", "MongoDB"],
   },
   {
-    title: "Test unitaire / fonctionnels / CI/CD",
-    items: ["Cypress", "Jest", "Cucumber", "CircleCI"],
-  },
-  {
     title: "Qualité et intégration",
     items: ["ESLint", "Prettier"],
   },
   {
-    title: "Tests & CI/CD",
-    items: ["Cypress", "Jest", "Cucumber", "CircleCI"],
+    title: "Test unitaire / fonctionnel",
+    items: ["Cypress", "Cucumber", "Jest"],
   },
+  // {
+  //   title: "CI/CD",
+  //   items: ["Jenkins", "CircleCI"]
+  // },
   {
     title: "Sécurité",
     items: ["JWT", "OAuth2"],
   },
   {
     title: "Cloud et déploiement",
-    items: ["Microsoft Azure", "Google Cloud", "Docker", "Vercel"],
+    items: ["Render", "Vercel", "Docker", "Microsoft Azure"],
   },
   {
     title: "Outils",
-    items: ["Git", "Figma", "Notion", "VS Code", "Docker", "ChatGPT", "Claude"],
+    items: ["Figma", "Notion", "VS Code", "Git"], // , "ChatGPT", "Claude"
   },
-  {
-    title: "Méthodologie",
-    items: [
-      "Agile/Scrum",
-      "UML",
-      "Gestion de projet", "(Gantt, budgétisation, cahier des charges)",
-    ],
-  },
+  // {
+  //   title: "Méthodologie",
+  //   items: [
+  //     "Agile/Scrum",
+  //     "UML",
+  //     "Gestion de projet",
+  //     "(Gantt, budgétisation, cahier des charges)",
+  //   ],
+  // },
 ];
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = React.useState(false);
-  React.useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setReduced(mq.matches);
-    onChange();
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
-  }, []);
-  return reduced;
+function chunkPairs(items: string[], size = 2) {
+  const out: string[][] = [];
+  for (let i = 0; i < items.length; i += size)
+    out.push(items.slice(i, i + size));
+  return out;
 }
 
 export default function Skills() {
-  const trackRef = React.useRef<HTMLDivElement | null>(null);
-  const reduceMotion = usePrefersReducedMotion();
-
-  const scrollByCards = (dir: -1 | 1) => {
-    const el = trackRef.current;
-    if (!el) return;
-
-    // largeur d’une card + gap (approx)
-    const firstCard = el.querySelector<HTMLElement>("[data-skill-card]");
-    const cardW = firstCard?.offsetWidth ?? 360;
-    const gap = 16;
-
-    el.scrollBy({
-      left: dir * (cardW + gap),
-      behavior: reduceMotion ? "auto" : "smooth",
-    });
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const chunkSize = isMobile ? 2 : 4;
 
   return (
-    <Box component="section" id="skills" sx={{ position: "relative" }}>
+    <Box
+      component="section"
+      id="skills"
+      sx={{
+        position: "relative",
+        py: { xs: 4, md: 6 },
+        px: { xs: 2, md: 4 },
+        borderRadius: 2,
+        overflow: "hidden",
+      }}
+    >
+      <Typography variant="h2" gutterBottom className="the-lego-movie-title">
+        Stack Technique
+      </Typography>
+
+      {/* Grille 2 colonnes (responsive) */}
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 2,
-          mb: 2,
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr 1fr", sm: "1fr 1fr", md: "1fr 1fr" },
+          gap: { xs: 1.5, sm: 2, md: 3 },
         }}
       >
-        <Typography variant="h2" className="the-lego-movie-title">
-          Competences cles
-        </Typography>
+        {groups.flatMap((group) => {
+          const pairs = chunkPairs(group.items, chunkSize);
 
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <IconButton
-            aria-label="Faire défiler vers la gauche"
-            onClick={() => scrollByCards(-1)}
-          >
-            <ChevronLeftRoundedIcon />
-          </IconButton>
-          <IconButton
-            aria-label="Faire défiler vers la droite"
-            onClick={() => scrollByCards(1)}
-          >
-            <ChevronRightRoundedIcon />
-          </IconButton>
-        </Box>
-      </Box>
+          return pairs.map((pair, idx) => {
+            const label = pair.join(" / ");
 
-      {/* Track */}
-      <Box
-        ref={trackRef}
-        sx={{
-          display: "flex",
-          gap: 2,
-          overflowX: "auto",
-          pb: 1,
-          scrollSnapType: "x mandatory",
-          WebkitOverflowScrolling: "touch",
-          scrollbarWidth: "thin",
-          "&::-webkit-scrollbar": { height: 10 },
-          "&::-webkit-scrollbar-thumb": {
-            borderRadius: 999,
-          },
-          px: { xs: 0.5, sm: 1 },
-        }}
-      >
-        {groups.map((g, idx) => {
-          const tilt = idx % 2 === 0 ? -1.2 : 1.2;
-          return (
-            <Card
-              key={g.title}
-              data-skill-card
-              variant="outlined"
-              sx={{
-                flex: "0 0 auto",
-                width: { xs: 280, sm: 320, md: 360 },
-                scrollSnapAlign: "start",
-                borderRadius: 3,
-                bgcolor: "#fff",
-                borderColor: "rgba(0,0,0,0.08)",
-                transform: `rotate(${tilt}deg)`,
-                transition:
-                  "transform 160ms ease, box-shadow 160ms ease, translate 160ms ease",
-                "&:hover": {
-                  transform: `rotate(0deg) translateY(-6px)`,
-                  boxShadow: "0 18px 46px rgba(0,0,0,0.18)",
-                },
-                p: 1.5,
-              }}
-            >
-              {/* Zone “photo” */}
-              <Box
+            return (
+              <Card
+                key={`${group.title}-${idx}`}
+                variant="outlined"
                 sx={{
-                  borderRadius: 2,
-                  p: 1.5,
-                  minHeight: 140,
-                  bgcolor: "rgba(0,0,0,0.03)",
-                  border: "1px solid rgba(0,0,0,0.06)",
-                  display: "flex",
-                  alignItems: "center",
+                  borderRadius: { xs: 2, md: 3 },
+                  borderColor: "rgba(70, 38, 9, 0.62)",
+                  bgcolor: "rgba(255,255,255,0.92)",
+                  px: { xs: 1.2, sm: 2, md: 3 },
+                  py: { xs: 1.2, sm: 2, md: 3 },
+                  boxShadow: "0 6px 18px rgba(0,0,0,0.06)",
+                  transition: "transform 160ms ease, box-shadow 160ms ease",
+                  "&:hover": {
+                    transform: { xs: "none", md: "translateY(-4px)" },
+                    boxShadow: {
+                      xs: "0 6px 18px rgba(0,0,0,0.06)",
+                      md: "0 18px 44px rgba(0,0,0,0.10)",
+                    },
+                  },
                 }}
               >
-                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                  {g.items.map((i) => (
-                    <Chip
-                      key={i}
-                      label={i}
-                      size="small"
-                      sx={{
-                        borderRadius: 999,
-                        fontWeight: 500,
-                      }}
-                    />
-                  ))}
-                </Stack>
-              </Box>
-
-              {/* Légende (titre en bas) */}
-              <CardContent sx={{ pb: "14px !important" }}>
+                {/* Titre */}
                 <Typography
-                  variant="h6"
                   sx={{
-                    mt: 1,
-                    textAlign: "center",
+                    fontSize: { xs: 18, sm: 16, md: 24 },
                     fontWeight: 800,
-                    letterSpacing: 0.2,
-                    color: "rgba(126, 86, 60, 1)"
+                    color: "rgb(80, 59, 33)",
+                    lineHeight: 1.2,
+                    whiteSpace: "normal",
+                    overflowWrap: "anywhere",
                   }}
                 >
-                  {g.title}
+                  {/* {pair.map((t, i) => (
+                    <React.Fragment key={t}>
+                      {t}
+                      {i < pair.length - 1 ? " / " : ""}
+                    </React.Fragment>
+                  ))} */}
+                  {label}
                 </Typography>
+
+                {/* Sous-titre */}
                 <Typography
-                  variant="caption"
-                  sx={{ display: "block", textAlign: "center", opacity: 0.65 }}
+                  sx={{
+                    mt: { xs: 0.3, md: 1 },
+                    fontSize: { xs: 11, sm: 12, md: 16 }, // ✅ plus petit mobile
+                    color: "rgba(120, 130, 145, 1)",
+                    fontWeight: 500,
+                  }}
                 >
+                  {group.title}
                 </Typography>
-              </CardContent>
-            </Card>
-          );
+              </Card>
+            );
+          });
         })}
       </Box>
     </Box>
