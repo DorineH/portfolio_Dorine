@@ -61,7 +61,7 @@ export default function Contact() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid size={{ xs: 12, md: 5 }}>
           <Card variant="outlined">
             <CardContent>
               <Typography variant="h3" gutterBottom>
