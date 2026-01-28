@@ -36,7 +36,7 @@ export default function CentreInteret() {
       <Container maxWidth="lg">
         <Grid container spacing={3} alignItems="stretch">
           {items.map((it) => (
-            <Grid key={it.title} item xs={12} md={4} sx={{ display: "flex" }}>
+            <Grid key={it.title} size={{ xs: 12, md: 4 }} sx={{ display: "flex" }}>
               <Paper
                 elevation={0}
                 sx={{
